@@ -1,4 +1,4 @@
-# Click Command Loader
+# Click Command Loader (CCL)
 
 ![Click Command Loader](.github/CCL.png)
 
@@ -19,18 +19,18 @@ The commands `create`, `delete` and `list` will be registered in your Click app!
 
 ## Installation
 
-I'm a package that is available on PyPi!
+I'm a package that is available on [PyPi](https://pypi.org/project/clickloader)!
 
 With Pip
 
 ```sh
-pip install ccl
+pip install clickloader
 ```
 
 With Poetry
 
 ```sh
-poetry add ccl
+poetry add clickloader
 ```
 
 ## Example

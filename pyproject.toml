@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "ccl"
-version = "0.0.1"
+name = "clickloader"
+version = "0.1.0"
 description = ""
 authors = ["Julien Mauroy <pro.julien.mauroy@gmail.com>"]
 readme = "README.md"
