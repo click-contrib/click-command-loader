@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "clickloader"
 version = "0.1.0"
-description = ""
+description = "Click Command Loader, permit to load Click command from a given folder."
 authors = ["Julien Mauroy <pro.julien.mauroy@gmail.com>"]
 readme = "README.md"
 packages = [{include = "ccl", from = "src"}]
+repository = "https://github.com/madebylydia/CCL"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.7"
 click = ">=8.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -19,6 +20,11 @@ pytest-cov = "^4.1.0"
 pytest-html = "^3.2.0"
 poethepoet = "^0.21.1"
 metadeco = "^0.2.1"
+tox = "^4.6.4"
+
+
+[tool.poetry.group.actions.dependencies]
+tox-gh-actions = "^3.1.3"
 
 [tool.poe]
 poetry_command = ""

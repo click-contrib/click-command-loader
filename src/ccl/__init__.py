@@ -1,20 +1,21 @@
 import logging
 import pathlib
 from importlib.metadata import distribution as __dist
+import typing
 
 import click
 
 from ccl import finder
 
-__version__ = __dist("ccl").version
-__author__ = __dist("ccl").metadata["Author"]
+__version__ = __dist("clickloader").version
+__author__ = __dist("clickloader").metadata["Author"]
 
 _log = logging.getLogger("ccl")
 
 
 def register_commands(
     group: click.Group,
-    source: "str | pathlib.Path",
+    source: typing.Union[str, pathlib.Path],
 ) -> None:
     path = pathlib.Path(source)
     _log.debug(f"Started registering commands in {path.resolve()}")
@@ -30,7 +31,7 @@ def register_commands(
         group.add_command(command)
 
 
-def fetch_commands_for_group(source: pathlib.Path) -> list[click.Command | click.Group]:
+def fetch_commands_for_group(source: pathlib.Path) -> typing.List[typing.Union[click.Command, click.Group]]:
     """Return a list of click's commands or groups.
 
     Parameters
@@ -38,7 +39,7 @@ def fetch_commands_for_group(source: pathlib.Path) -> list[click.Command | click
     source : pathlib.Path
         Path to the source that should be read.
     """
-    entities: list[click.Command | click.Group] = []
+    entities: typing.List[typing.Union[click.Command, click.Group]] = []
 
     for file in source.iterdir():
         if file.is_file():

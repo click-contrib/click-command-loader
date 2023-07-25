@@ -4,6 +4,7 @@ import logging
 import pathlib
 from shutil import ExecError
 from typing import Literal, overload
+import typing
 
 import click
 
@@ -58,7 +59,7 @@ def fetch_cmd_func(
 
 def fetch_cmd_func(
     path: pathlib.Path, export_function_name: str, return_type: str
-) -> click.Command | click.Group:
+) -> typing.Union[click.Command, click.Group]:
     """Load a module at path and try to export a function from its name.
     Supposedly to return a click command.
 
