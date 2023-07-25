@@ -1,44 +1,44 @@
 name: Upload CCL to PyPi
 
 on:
-    release:
-        types: [published]
+  release:
+    types: [published]
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    deploy:
-        environment: release
-        runs-on: ubuntu-latest
+  deploy:
+    environment: release
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout Repository
-              uses: actions/checkout@v3
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-            - name: Load cached Poetry installation
-              uses: actions/cache@v3
-              with:
-                path: ~/.local
-                key: poetry-0 # To reset cache, increment
+      - name: Load cached Poetry installation
+        uses: actions/cache@v3
+        with:
+          path: ~/.local
+          key: poetry-0 # To reset cache, increment
 
-            - name: Install Poetry
-              if: steps.cached-poetry.outputs.cache-hit != 'true'
-              uses: snok/install-poetry@v1
+      - name: Install Poetry
+        if: steps.cached-poetry.outputs.cache-hit != 'true'
+        uses: snok/install-poetry@v1
 
-            - name: Set up Python ${{ matrix.python-version }}
-              uses: actions/setup-python@v4
-              with:
-                python-version: ${{ matrix.python-version }}
-                cache: 'poetry'
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "poetry"
 
-            - name: Install dependencies
-              run: poetry install -n
+      - name: Install dependencies
+        run: poetry install -n
 
-            - name: Build package
-              run: poetry build -n
+      - name: Build package
+        run: poetry build -n
 
-            - name: Publish to PyPi
-              run: |
-                poetry config pypi-token.pypi "${{ secrets.PYPI_API_TOKEN }}"
-                poetry publish -n
+      - name: Publish to PyPi
+        run: |
+          poetry config pypi-token.pypi "${{ secrets.PYPI_API_TOKEN }}"
+          poetry publish -n
