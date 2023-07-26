@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "clickloader"
-version = "0.1.2"
+version = "0.1.3"
 description = "Click Command Loader, permit to load Click command from a given folder."
 authors = ["Julien Mauroy <pro.julien.mauroy@gmail.com>"]
 readme = "README.md"
