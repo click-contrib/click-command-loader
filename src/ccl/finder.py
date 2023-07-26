@@ -2,9 +2,9 @@ import ast
 import importlib.util
 import logging
 import pathlib
+import typing
 from shutil import ExecError
 from typing import Literal, overload
-import typing
 
 import click
 

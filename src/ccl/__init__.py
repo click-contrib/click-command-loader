@@ -1,7 +1,7 @@
 import logging
 import pathlib
-from importlib.metadata import distribution as __dist
 import typing
+from importlib.metadata import distribution as __dist
 
 import click
 
@@ -17,7 +17,7 @@ def register_commands(
     group: click.Group,
     source: typing.Union[str, pathlib.Path],
 ) -> None:
-    path = pathlib.Path(source)
+    path = pathlib.Path(source).resolve()
     _log.debug(f"Started registering commands in {path.resolve()}")
 
     commands = fetch_commands_for_group(path)
@@ -31,7 +31,9 @@ def register_commands(
         group.add_command(command)
 
 
-def fetch_commands_for_group(source: pathlib.Path) -> typing.List[typing.Union[click.Command, click.Group]]:
+def fetch_commands_for_group(
+    source: pathlib.Path,
+) -> typing.List[typing.Union[click.Command, click.Group]]:
     """Return a list of click's commands or groups.
 
     Parameters
@@ -53,7 +55,6 @@ def fetch_commands_for_group(source: pathlib.Path) -> typing.List[typing.Union[c
             entities.append(command)
 
         if file.is_dir():
-
             _log.debug(f"Found directory {file.resolve()}, looping inside...")
 
             if (file / "__init__.py").exists():
