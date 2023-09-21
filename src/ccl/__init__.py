@@ -16,11 +16,14 @@ _log = logging.getLogger("ccl")
 def register_commands(
     group: click.Group,
     source: typing.Union[str, pathlib.Path],
+    command_name_lookup_method: typing.Literal["file", "func"] = "func",
 ) -> None:
     path = pathlib.Path(source).resolve()
     _log.debug(f"Started registering commands in {path.resolve()}")
 
-    commands = fetch_commands_for_group(path)
+    commands = fetch_commands_for_group(
+        path, cmd_name_method=command_name_lookup_method
+    )
 
     for command in commands:
         _log.info(
@@ -32,7 +35,7 @@ def register_commands(
 
 
 def fetch_commands_for_group(
-    source: pathlib.Path,
+    source: pathlib.Path, *, cmd_name_method: typing.Literal["file", "func"] = "func"
 ) -> typing.List[typing.Union[click.Command, click.Group]]:
     """Return a list of click's commands or groups.
 
@@ -51,6 +54,9 @@ def fetch_commands_for_group(
             _log.debug(f"Found {file.name}")
             function_name = finder.find_cmd_func_name(file)
             command = finder.fetch_cmd_func(file, function_name, "command")
+
+            if cmd_name_method == "file":
+                command.name = file.stem
 
             entities.append(command)
 

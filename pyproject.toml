@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "clickloader"
-version = "0.1.3"
+version = "0.2.0"
 description = "Click Command Loader, permit to load Click command from a given folder."
 authors = ["Julien Mauroy <pro.julien.mauroy@gmail.com>"]
 readme = "README.md"
@@ -19,7 +19,7 @@ pytest = "^7.4.0"
 pytest-cov = "^4.1.0"
 pytest-html = "^3.2.0"
 poethepoet = "^0.21.1"
-metadeco = "^0.2.1"
+metadeco = "^0.2.1" 
 tox = "^4.6.4"
 
 
